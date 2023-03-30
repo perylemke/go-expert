@@ -6,6 +6,7 @@ func soma(a, b *int) int {
 	return *a + *b
 }
 
+// Usar ponteiros quando for mexer com valores mútaveis
 func main() {
 	minhaVar1 := 80
 	minhaVar2 := 20
