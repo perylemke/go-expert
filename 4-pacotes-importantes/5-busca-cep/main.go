@@ -23,17 +23,20 @@ type ViaCEP struct {
 
 func main() {
 	for _, url := range os.Args[1:] {
+		// Faz a requisição para a API de consulta de CEP
 		req, err := http.Get(fmt.Sprintf("http://viacep.com.br/ws/%s/json/", url))
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Erro ao fazer requisição: %v\n", err)
 		}
 		defer req.Body.Close()
 
+		// Lê o conteúdo da requsição
 		res, err := io.ReadAll(req.Body)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Erro ao ler resposta: %v\n", err)
 		}
 
+		// Realiza o parse da requisição para um JSON
 		var data ViaCEP
 		err = json.Unmarshal(res, &data)
 		if err != nil {
